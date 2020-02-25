@@ -35,29 +35,17 @@ traversal_path = []
 
 # Explore the unknown or rather find it
 def explore(player, moves_cue):
-    # init queue
     q = Queue()
-    # init set for visited rooms
     visited = set()
-    # add current room to queue
     q.enqueue([player.current_room.id])
-    # if queue is bigger than 0 there are things to explore
     while q.size() > 0:
-        # as path is explored removefrom queue
         path = q.dequeue()
-        # keep track of last room visited
         last_room = path[-1]
-        # if the last room was not in previously visited
         if last_room not in visited:
-            # add to list of visited
             visited.add(last_room)
-            # Find all the exits for the room
             for exit in graph[last_room]:
-                # if we find an exit in the room that is unexplored
                 if graph[last_room][exit] == "?":
-                    # add path to list to explore
                     return path
-                    # otherwise remove path as already explored
                 else:
                     lost = list(path)
                     lost.append(graph[last_room][exit])
